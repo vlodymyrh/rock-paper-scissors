@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'game.rockpaperscissors'
+version '1.0-SNAPSHOT'
+
+version = '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    spockframeworkVersion   = '1.1-groovy-2.4'
+    codehausGroovyVersion   = '2.4.15'
+}
+
+dependencies {
+    testCompile group: 'org.spockframework', name: 'spock-core', version: "${spockframeworkVersion}"
+    testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version: "${codehausGroovyVersion}"
+}
+jar {
+    manifest.attributes provider: 'gradle'
+}
+
