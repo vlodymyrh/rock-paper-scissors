@@ -1,49 +1,53 @@
+package game.rockpaperscissors.service
+
+import game.rockpaperscissors.constants.ShapeForm
 
 import spock.lang.Specification
 
 class GameServiceSpec extends Specification {
 
-    def shapeGeneratorService = Mock(ShapeGeneratorService)
+    def shapeGeneratorService = Mock(ShapeGeneratorService.class)
 
     def "should return round result Drawn"() {
         setup: "Game"
-        def gameService = new GameService()
+        def gameService = new GameServiceImpl()
+        def shape = ShapeForm.ROCK
 
         when: "Play"
         def round = gameService.playRound()
 
         then: "Second player shape is Rock"
-        1 * shapeGeneratorService.generate() >> ShakeForm.Rock
+        1 * shapeGeneratorService.generate() >> shape
 
         expect: "Drawn result"
-        round.getResult().getName().equals("Drawn")
+        round.getResult().getName() == "Drawn"
     }
 
-    def "should return round result Player1 win"() {
+    def "should return round result Player1 won"() {
         setup: "Game"
-        def gameService = new GameService()
+        def gameService = new GameServiceImpl()
 
         when: "Play"
         def round = gameService.playRound()
 
         then: "Second player shape is Scissors"
-        1 * shapeGeneratorService.generate() >> ShakeForm.Scissors
+        1 * shapeGeneratorService.generate() >> ShapeForm.SCISSORS
 
-        expect: "Player1 win"
-        round.getResult().getName().equals("Player1 win")
+        expect: "Player1 won"
+        round.getResult().getName() == "Player1 won"
     }
 
-    def "should return round result Player2 win"() {
+    def "should return round result Player2 won"() {
         setup: "Game"
-        def gameService = new GameService()
+        def gameService = new GameServiceImpl()
 
         when: "Play"
         def round = gameService.playRound()
 
         then: "Second player shape is Paper"
-        1 * shapeGeneratorService.generate() >> ShakeForm.Paper
+        1 * shapeGeneratorService.generate() >> ShapeForm.PAPER
 
-        expect: "Player2 win"
-        round.getResult().getName().equals("Player2 win")
+        expect: "Player2 won"
+        round.getResult().getName() == "Player2 won"
     }
 }
